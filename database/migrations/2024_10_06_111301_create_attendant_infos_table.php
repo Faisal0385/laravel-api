@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('weight')->nullable();
             $table->string('blood_grp')->nullable();
             $table->string('joining_date');
+            $table->string('fee')->nullable();
             $table->string('image')->nullable();
             $table->string('salary')->default(0);
             $table->string('created_by')->nullable();

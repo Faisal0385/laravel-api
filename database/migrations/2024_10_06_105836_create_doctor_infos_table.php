@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->string('full_name');
             $table->string('mobile');
-            $table->string('email')->nullable();
             $table->string('degree')->nullable();
             $table->string('designation')->nullable();
             $table->string('address')->nullable();
@@ -24,6 +23,8 @@ return new class extends Migration
             $table->string('bod')->nullable();
             $table->string('weight')->nullable();
             $table->string('blood_grp')->nullable();
+            $table->string('email')->unique();
+            $table->string('password')->nullable();
             $table->string('image')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

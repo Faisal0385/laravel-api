@@ -34,9 +34,8 @@ return new class extends Migration
             $table->string('date_month')->nullable();
             $table->string('date_year')->nullable();
             $table->string('payment_amount')->default(0);
+            $table->string('payment_time')->nullable();
             $table->enum('payment_status', ['paid', 'due', 'cancel'])->default('due');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
 
             $table->timestamps();
         });

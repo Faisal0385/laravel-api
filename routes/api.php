@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookingAppointmentController;
+use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\UserController;
+use App\Models\BookingAppointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +28,14 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
 Route::post('/reset-password', [UserController::class, 'resetPassword']);
 Route::post('/verify-code', [UserController::class, 'verifyCode']);
+
+
+Route::post('/doctor/register', [DoctorInfoController::class, 'register']);
+Route::post('/doctor/login', [DoctorInfoController::class, 'login']);
+Route::post('/doctor/forgot-password', [DoctorInfoController::class, 'forgotPassword']);
+Route::post('/doctor/reset-password', [DoctorInfoController::class, 'resetPassword']);
+Route::post('/doctor/verify-code', [DoctorInfoController::class, 'verifyCode']);
+
+
+Route::post('/doctor/booking-appointment', [BookingAppointmentController::class, 'bookingAppointment']);
+Route::post('/doctor/booking-payment', [BookingAppointmentController::class, 'bookingPayment']);
