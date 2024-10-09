@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendantController;
 use App\Http\Controllers\BookingAppointmentController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\UserController;
@@ -30,12 +31,20 @@ Route::post('/reset-password', [UserController::class, 'resetPassword']);
 Route::post('/verify-code', [UserController::class, 'verifyCode']);
 
 
-Route::post('/doctor/register', [DoctorInfoController::class, 'register']);
-Route::post('/doctor/login', [DoctorInfoController::class, 'login']);
-Route::post('/doctor/forgot-password', [DoctorInfoController::class, 'forgotPassword']);
-Route::post('/doctor/reset-password', [DoctorInfoController::class, 'resetPassword']);
-Route::post('/doctor/verify-code', [DoctorInfoController::class, 'verifyCode']);
+Route::post('/v1/doctor/register', [DoctorInfoController::class, 'register']);
+Route::post('/v1/doctor/login', [DoctorInfoController::class, 'login']);
+// Route::post('/v1/doctor/forgot-password', [DoctorInfoController::class, 'forgotPassword']);
+// Route::post('/v1/doctor/reset-password', [DoctorInfoController::class, 'resetPassword']);
+// Route::post('/v1/doctor/verify-code', [DoctorInfoController::class, 'verifyCode']);
 
 
-Route::post('/doctor/booking-appointment', [BookingAppointmentController::class, 'bookingAppointment']);
-Route::post('/doctor/booking-payment', [BookingAppointmentController::class, 'bookingPayment']);
+Route::post('/v1/doctor/booking-appointment', [BookingAppointmentController::class, 'bookingAppointment']);
+Route::post('/v1/doctor/booking-payment', [BookingAppointmentController::class, 'bookingPayment']);
+
+
+// attendant api
+Route::post('/v1/attendant/register', [AttendantController::class, 'register']);
+Route::post('/v1/attendant/login', [AttendantController::class, 'login']);
+// Route::post('/v1/attendant/forgot-password', [AttendantController::class, 'forgotPassword']);
+// Route::post('/v1/attendant/reset-password', [AttendantController::class, 'resetPassword']);
+// Route::post('/v1/attendant/verify-code', [AttendantController::class, 'verifyCode']);
