@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttendantInfo;
 use App\Models\BookingAppointment;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BookingAppointmentController extends Controller
 {
-    function bookingAppointment(Request $request)
+    public function bookingAppointment(Request $request)
     {
         date_default_timezone_set("Asia/Dhaka");
         $contact_date = date("d-m-Y");
@@ -67,7 +69,7 @@ class BookingAppointmentController extends Controller
         }
     }
 
-    function bookingPayment(Request $request)
+    public function bookingPayment(Request $request)
     {
         $dataCheck = BookingAppointment::find($request->booking_id);
         if (empty($dataCheck)) {
@@ -96,6 +98,64 @@ class BookingAppointmentController extends Controller
                 'message' => 'Payment Successful',
             ], 200);
         } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something Went Wrong'
+                // 'message' => $e->getMessage()
+            ], 200);
+        }
+    }
+
+    public function duePatientList($asst_id): JsonResponse
+    {
+        $isEmailExist = AttendantInfo::find(id: $asst_id);
+
+        if (!$isEmailExist) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized'
+            ], 200);
+        }
+
+        date_default_timezone_set("Asia/Dhaka");
+        $today_date = date("d-m-Y");
+
+        try {
+            $dataList = BookingAppointment::where('asst_id', '=', $asst_id)->where('date', '=', $today_date)->where('payment_status', '=', 'due')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $dataList,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something Went Wrong'
+                // 'message' => $e->getMessage()
+            ], 200);
+        }
+    }
+
+    public function paidPatientList($asst_id): JsonResponse
+    {
+        $isEmailExist = AttendantInfo::find(id: $asst_id);
+
+        if (!$isEmailExist) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized'
+            ], 200);
+        }
+
+        date_default_timezone_set("Asia/Dhaka");
+        $today_date = date("d-m-Y");
+
+        try {
+            $dataList = BookingAppointment::where('asst_id', '=', $asst_id)->where('date', '=', $today_date)->where('payment_status', '=', 'paid')->get();
+            return response()->json([
+                'status' => 'success',
+                'data' => $dataList,
+            ], 200);
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Something Went Wrong'

@@ -81,9 +81,6 @@ class DoctorInfoController extends Controller
                 'message' => 'No user found'
             ], 200);
         }
-
-
-        // return "doctor login index";
     }
 
     function forgotPassword()

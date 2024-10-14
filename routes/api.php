@@ -48,3 +48,8 @@ Route::post('/v1/attendant/login', [AttendantController::class, 'login']);
 // Route::post('/v1/attendant/forgot-password', [AttendantController::class, 'forgotPassword']);
 // Route::post('/v1/attendant/reset-password', [AttendantController::class, 'resetPassword']);
 // Route::post('/v1/attendant/verify-code', [AttendantController::class, 'verifyCode']);
+
+
+Route::get('/v1/due/patient-list/{id}', [BookingAppointmentController::class, 'duePatientList']);
+Route::get('/v1/paid/patient-list/{id}', [BookingAppointmentController::class, 'paidPatientList']);
+

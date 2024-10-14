@@ -75,7 +75,7 @@ class AttendantController extends Controller
                 $data = $isCheck;
                 return response()->json([
                     'status' => 'success',
-                    'message' => $data
+                    'data' => $data
                 ], 200);
             } else {
                 return response()->json([
