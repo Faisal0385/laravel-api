@@ -19,6 +19,7 @@ class BookingAppointmentController extends Controller
 
         ## getting data from form
         $date = $contact_date;
+        $asst_id = $request->asst_id;
         $full_name = $request->full_name;
         $serial_no = $request->serial_no;
         $gender = $request->gender;
@@ -36,7 +37,7 @@ class BookingAppointmentController extends Controller
             DB::table('booking_appointments')->insert([
                 'doctor_id' => "1",
                 'venue_id' => "2",
-                'asst_id' => "1",
+                'asst_id' => $asst_id,
                 'patient_id' => "PID" . date("dm") . "-" . $id_no,
                 'visit_id' => "VID" . date("dm") . "-" . $id_no,
                 'serial_no' => $serial_no,
