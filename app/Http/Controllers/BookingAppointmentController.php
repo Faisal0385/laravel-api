@@ -152,8 +152,10 @@ class BookingAppointmentController extends Controller
 
         try {
             $dataList = BookingAppointment::where('asst_id', '=', $asst_id)->where('date', '=', $today_date)->where('payment_status', '=', 'paid')->get();
+            $total = $dataList->where('payment_status', 'paid')->sum('payment_amount');
             return response()->json([
                 'status' => 'success',
+                "total" => $total,
                 'data' => $dataList,
             ], 200);
         } catch (\Throwable $th) {
