@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class AttendantController extends Controller
 {
-    function register(Request $request)
+    public function register(Request $request)
     {
         $isEmailExist = AttendantInfo::where("email", $request->email)->count();
         if ($isEmailExist) {
@@ -33,7 +33,7 @@ class AttendantController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        try {
+        // try {
             DB::table('attendant_infos')->insert([
                 'doctor_id' => $doctor_id,
                 'venue_id' => $venue_id,
@@ -53,16 +53,16 @@ class AttendantController extends Controller
                 'status' => 'success',
                 'message' => 'Doctor Info Added Successfully',
             ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Something Went Wrong',
-                // 'error' => $e->getMessage(),
-            ], 200);
-        }
+        // } catch (Exception $e) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Something Went Wrong',
+        //         // 'error' => $e->getMessage(),
+        //     ], 200);
+        // }
     }
 
-    function login(Request $request)
+    public function login(Request $request)
     {
         ## getting data from form
         $email = $request->email;

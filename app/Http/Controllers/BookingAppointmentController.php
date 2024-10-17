@@ -166,4 +166,34 @@ class BookingAppointmentController extends Controller
             ], 200);
         }
     }
+
+
+    public function searchPatient($asst_id, $keyword): JsonResponse
+    {
+        try {
+            $dataList = BookingAppointment::where('asst_id', '=', $asst_id)
+            ->Where('mobile', 'LIKE', '%'.$keyword.'%')
+            ->orWhere('visit_id', "=",$keyword)->get();
+
+            // $dataList = BookingAppointment::where('asst_id', '=', $asst_id)
+            // ->where(function ($query) use ($keyword) {
+            //     $query->where('mobile', '=', $keyword)
+            //           ->orWhere('visit_id', '=', $keyword);
+            // })->get();
+
+
+            
+            return response()->json([
+                'status' => 'success',
+                'data' => $dataList,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something Went Wrong'
+                // 'message' => $e->getMessage()
+            ], 200);
+        }
+    }
+    
 }

@@ -53,3 +53,5 @@ Route::post('/v1/attendant/login', [AttendantController::class, 'login']);
 Route::get('/v1/due/patient-list/{id}', [BookingAppointmentController::class, 'duePatientList']);
 Route::get('/v1/paid/patient-list/{id}', [BookingAppointmentController::class, 'paidPatientList']);
 
+Route::get('/v1/search/patient/{asst_id}/{keyword}', [BookingAppointmentController::class, 'searchPatient']);
+
